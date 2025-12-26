@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "The Hobbit",
+        "translatedTitle": "Hobbit",
+        "author": "J.R.R. Tolkien",
+        "language": "polish",
+        "series": null,
+        "numberInSeries": null,
+        "subSeries": null,
+        "numberInSubSeries": null,
+        "format": "paperback"
+    },
+      {
+        "id": 2,
+        "title": "ABC Murder",
+        "translatedTitle": "Zabójca ABC",
+        "author": "Agatha Christie",
+        "language": "polish",
+        "series": "Hercules Poirot",
+        "numberInSeries": null,
+        "subSeries": null,
+        "numberInSubSeries": null,
+        "format": "paperback"
+    }
+]
