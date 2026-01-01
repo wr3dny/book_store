@@ -1,7 +1,6 @@
 import json
 import os
 import sys
-from numbers import Number
 from typing import List, Dict, Optional
 
 FILE_PATH = "books.json"
@@ -57,8 +56,12 @@ def save_books(books: List[Book]) -> None:
         json.dump(books, f, indent=4, ensure_ascii=False)
 
 
-def next_id(books: List[Book]) -> int:
-    return max((book["id"] for book in books), default=0) + 1
+def next_id(books: List[Book]) -> Optional[int]:
+    existing_ids = {book["id"] for book in books}
+    for i in range(1, max(existing_ids, default=0) + 2):
+        if i not in existing_ids:
+            return i
+    return None
 
 
 def remove_book(book_id: int) -> bool:

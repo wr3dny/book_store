@@ -11,16 +11,37 @@
         "numberInSubSeries": null,
         "format": "paperback"
     },
-      {
-        "id": 2,
-        "title": "ABC Murder",
-        "translatedTitle": "Zabójca ABC",
-        "author": "Agatha Christie",
-        "language": "polish",
-        "series": "Hercules Poirot",
+    {
+        "id": 3,
+        "author": "Varius",
+        "title": "Legacies of betrayal",
+        "series": "Warhammer 40k",
         "numberInSeries": null,
-        "subSeries": null,
+        "subSeries": "Horus Heresy",
         "numberInSubSeries": null,
-        "format": "paperback"
+        "format": "Paperback",
+        "language": "English"
+    },
+    {
+        "id": 4,
+        "author": "Dan Abnett",
+        "title": "ravenor",
+        "series": "Ravenor",
+        "numberInSeries": 1,
+        "subSeries": "Ravenor",
+        "numberInSubSeries": 1,
+        "format": "Paperback",
+        "language": "English"
+    },
+    {
+        "id": 2,
+        "author": "Nick Kyme",
+        "title": "Old Earth",
+        "series": "Warhammer 40k",
+        "numberInSeries": null,
+        "subSeries": "Horus Heresy",
+        "numberInSubSeries": null,
+        "format": "Paperback",
+        "language": "English"
     }
 ]
