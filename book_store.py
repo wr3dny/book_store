@@ -25,7 +25,13 @@ def load_books() -> List[Book]:
         return []
 
     with open(FILE_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+        books: List[Book] = json.load(f)
+
+    for bk in books:
+        bk["id"] = _coerce_id(bk.get("id"))
+
+    books.sort(key=lambda b: (b.get("id") is None, b.get("id")))
+    return books
 
 
 def list_books() -> None:
@@ -52,12 +58,18 @@ def list_books() -> None:
 
 
 def save_books(books: List[Book]) -> None:
+    books_sorted = sorted(books, key=lambda b: (b.get("id") is None, b.get("id")))
     with open(FILE_PATH, "w", encoding="utf-8") as f:
-        json.dump(books, f, indent=4, ensure_ascii=False)
+        json.dump(books_sorted, f, indent=4, ensure_ascii=False)
 
 
 def next_id(books: List[Book]) -> Optional[int]:
-    existing_ids = {book["id"] for book in books}
+    existing_ids = set()
+    for b in books:
+        v = b.get("id")
+        if isinstance(v, int):
+            existing_ids.add(v)
+
     for i in range(1, max(existing_ids, default=0) + 2):
         if i not in existing_ids:
             return i
@@ -75,6 +87,16 @@ def remove_book(book_id: int) -> bool:
     return True
 
 
+def _coerce_id(value) -> Optional[int]:
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str):
+        s = value.strip()
+        if s.isdigit() or (s.startswith("-") and s[1:].isdigit()):
+            return int(s)
+    return None
+
+
 def _parse_new_value(current: BookValue, raw: str) -> tuple[bool, BookValue]:
     """
     Returns (should_update, new_value).
@@ -85,6 +107,7 @@ def _parse_new_value(current: BookValue, raw: str) -> tuple[bool, BookValue]:
     """
 
     if raw == "" or raw == " ":
+
         return False, current
 
     if raw.strip().lower() == "null":
@@ -176,8 +199,7 @@ def update_book(book_id: int | None) -> Book | None:
             print("Book updated.")
             return existing
 
-        print("No book found with this ID. Choose another ID or exit to menu.")
-        return None
+    print("No book found with this ID. Choose another ID or exit to menu.")
     return None
 
 
